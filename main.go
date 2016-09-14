@@ -25,6 +25,11 @@ func main() {
 			Name: "details, d",
 			Usage: "Shows all responses (including OK ones)",
 		},
+		cli.IntFlag{
+			Name: "threads",
+			Usage: "Number of `THREADS` to run checks on. Defaults to 50, but that's quite a few, so feel free to tweak.",
+			Value: 50,
+		},
 	}
 
 	app.Action = func(c *cli.Context) error {
@@ -41,6 +46,7 @@ func main() {
 			WG: wg,
 			Root: c.String("url"),
 			Verbose: c.Bool("details"),
+			Threads: c.Int("threads"),
 		})
 		wg.Wait()
 

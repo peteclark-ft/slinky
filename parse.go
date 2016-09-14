@@ -9,7 +9,10 @@ func RunParser(config Conf, channel chan HtmlPage){
 	defer config.WG.Done()
 
 	anchors := make(chan Anchor)
-	go RunChecker(config, anchors)
+
+	for i := 0 ; i < config.Threads ; i++ { // run extra checkers
+		go RunChecker(config, anchors)
+	}
 
 	for {
 		page, more := <- channel

@@ -12,6 +12,7 @@ type (
 		WG *sync.WaitGroup
 		Root string
 		Verbose bool
+		Threads int
 	}
 
 	Anchor struct {
